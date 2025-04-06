@@ -1127,9 +1127,19 @@ with tabs[3]:
 # ----------------------------
 # Add footer
 st.markdown("""
-<div style="text-align: center; padding: 2rem; color: #666;">
-    <hr style="margin-bottom: 1rem;">
-    <p>IceWatch Glacier Monitoring System v2.1 | Developed with ❄️ by Anser, Zuha, Talha</p>
-    <p>Operational since 2025 | Last updated: Today </p>
+<div style="text-align: center; padding: 2rem; margin-top: 2rem; border-top: 1px solid #E4E7EB;">
+    <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 15px;">
+        <div style="height: 36px; width: 36px; background: linear-gradient(135deg, #0455BF 0%, #03A9F4 100%); 
+                   border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; 
+                   font-size: 20px; margin-right: 10px;">❄️</div>
+        <p style="font-weight: 600; font-size: 1.4rem; color: #323F4B; margin: 0;">IceWatch</p>
+    </div>
+    <p style="color: #52606D; margin-bottom: 5px;">Glacier Monitoring System v2.1 | Developed by Anser, Zuha, Talha</p>
+    <p style="color: #7B8794; font-size: 0.9rem;">Operational since 2025 | Last updated: April 6, 2025</p>
+    <div style="display: flex; justify-content: center; gap: 20px; margin-top: 15px;">
+        <a href="#" style="color: #0455BF; text-decoration: none; font-size: 0.9rem;">Documentation</a>
+        <a href="#" style="color: #0455BF; text-decoration: none; font-size: 0.9rem;">Privacy Policy</a>
+        <a href="#" style="color: #0455BF; text-decoration: none; font-size: 0.9rem;">Contact</a>
+    </div>
 </div>
 """, unsafe_allow_html=True)
