@@ -29,7 +29,7 @@ def preprocess_velocity_data(historical_df):
     return summary_df
 
 class TransformerRegressor(nn.Module):
-    def __init__(self, input_dim, d_model, nhead, num_layers, dropout=0.1):
+    def __init__(self, input_dim, d_model, nhead, num_layers, dropout=0.2):
         super(TransformerRegressor, self).__init__()
         self.embedding = nn.Linear(input_dim, d_model)
         self.pos_encoder = nn.Parameter(torch.zeros(1, 1000, d_model))
@@ -53,17 +53,36 @@ class TransformerRegressor(nn.Module):
         x = self.fc(x[:, -1, :])
         return x
 
+# def load_model(model_path):
+#     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+#     model = TransformerRegressor(input_dim=8, d_model=512, nhead=8, num_layers=6, dropout=0.2).to(device)
+#     model.load_state_dict(torch.load(model_path, map_location=device))
+#     model.eval()
+#     print(f"Model loaded on {device}")
+#     return model, device
+
 def load_model(model_path):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model = TransformerRegressor(input_dim=8, d_model=256, nhead=8, num_layers=4, dropout=0.1).to(device)
-    model.load_state_dict(torch.load(model_path, map_location=device))
+    model = TransformerRegressor(input_dim=8, d_model=512, nhead=8, num_layers=6, dropout=0.2).to(device)
+    
+    # Load the state dictionary
+    state_dict = torch.load(model_path, map_location=device)
+    
+    # Remove 'module.' prefix from keys if present
+    new_state_dict = {}
+    for key, value in state_dict.items():
+        new_key = key.replace("module.", "") if key.startswith("module.") else key
+        new_state_dict[new_key] = value
+    
+    # Load the adjusted state dictionary
+    model.load_state_dict(new_state_dict)
     model.eval()
     print(f"Model loaded on {device}")
     return model, device
 
 def get_velocity_data(lat, lon):
     print(f"Fetching data for lat={lat}, lon={lon}")
-    points = [(lat, lon)]
+    points = [(lon, lat)]
     velocities = velocity_cubes.get_time_series(points=points)
     print(f"Velocities: {velocities}")
     all_data = []
