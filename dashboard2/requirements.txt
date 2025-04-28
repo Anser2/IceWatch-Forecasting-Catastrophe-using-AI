@@ -1,0 +1,14 @@
+# requirements.txt
+streamlit==1.38.0
+numpy==1.26.4
+pandas==2.2.3
+plotly==5.24.1
+folium==0.17.0
+streamlit-folium==0.22.0
+torch==2.4.1
+tensorflow==2.17.0
+scikit-learn==1.5.2
+requests==2.32.3
+joblib==1.4.2
+streamlit-extras==0.4.7
+itslive
