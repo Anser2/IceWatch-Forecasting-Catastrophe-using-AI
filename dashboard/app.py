@@ -414,22 +414,39 @@ def adjust_color_brightness(hex_color, factor):
 # ----------------------------
 # Header and Logo
 # ----------------------------
-col_logo, col_title = st.columns([1, 4])
+# Creating columns for logo and title
+col_logo, col_title = st.columns([1, 4])  # Fixed missing bracket
 
 with col_logo:
     st.markdown("""
-    <div style="text-align: left; margin-top: -15px; padding-top: 0;">
-        <span style="font-size: 6rem;">❄️</span>
+    <div style="text-align: left;">
+        <span style="font-size: 6rem;">❄️</span>  <!-- Increased icon size -->
     </div>
     """, unsafe_allow_html=True)
 
 with col_title:
     st.markdown("""
-    <div style="text-align: left; margin-top: -15px; padding-top: 0;">
-        <p style="font-size: 3rem; font-weight: bold; margin-bottom: 0; line-height: 1.1;">IceWatch</p>
-        <p style="font-size: 1.5rem; color: gray; margin-top: 0;">Advanced Glacier Monitoring & GLOF Risk Assessment</p>
+    <div style="text-align: left;">
+        <p style="font-size: 3rem; font-weight: bold; margin-bottom: 0;">IceWatch</p>
+        <p style="font-size: 1.5rem; color: gray;">Advanced Glacier Monitoring & GLOF Risk Assessment</p>
     </div>
     """, unsafe_allow_html=True)
+
+
+# with col_logo:
+#     st.markdown("""
+#     <div style="text-align: left; margin-top: -15px; padding-top: 0;">
+#         <span style="font-size: 6rem;">❄️</span>
+#     </div>
+#     """, unsafe_allow_html=True)
+
+# with col_title:
+#     st.markdown("""
+#     <div style="text-align: left; margin-top: -15px; padding-top: 0;">
+#         <p style="font-size: 3rem; font-weight: bold; margin-bottom: 0; line-height: 1.1;">IceWatch</p>
+#         <p style="font-size: 1.5rem; color: gray; margin-top: 0;">Advanced Glacier Monitoring & GLOF Risk Assessment</p>
+#     </div>
+#     """, unsafe_allow_html=True)
 # ----------------------------
 # Load Models & Scalers
 # ----------------------------
