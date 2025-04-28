@@ -27,115 +27,407 @@ st.set_page_config(
 )
 
 # Custom CSS
+# Line 30: Replace the entire <style> block
 st.markdown("""
 <style>
+    /* ===== BASE STYLING ===== */
+    :root {
+        --primary: #0455BF;
+        --primary-light: #0572E6;
+        --primary-dark: #023E89;
+        --secondary: #03A9F4;
+        --accent: #1DE9B6;
+        --warning: #FF9800;
+        --danger: #F44336;
+        --success: #4CAF50;
+        --grey-100: #F5F7FA;
+        --grey-200: #E4E7EB;
+        --grey-300: #CBD2D9;
+        --grey-400: #9AA5B1;
+        --grey-500: #7B8794;
+        --grey-600: #616E7C;
+        --grey-700: #52606D;
+        --grey-800: #3E4C59;
+        --grey-900: #323F4B;
+        --text-primary: #1A202C;
+        --text-secondary: #4A5568;
+        --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        --transition: all 0.3s ease;
+        --radius-sm: 4px;
+        --radius-md: 8px;
+        --radius-lg: 16px;
+    }
+    
+    /* App-wide styles */
     .main .block-container {
         padding-top: 1rem;
         padding-bottom: 1rem;
+        max-width: 1400px;
     }
-    .stTabs [data-baseweb="tab-list"] {
-        gap: 24px;
-    }
-    .stTabs [data-baseweb="tab"] {
-        height: 50px;
-        white-space: pre-wrap;
-        border-radius: 4px 4px 0px 0px;
-        font-weight: 500;
-        background-color: #f0f2f6;
-        border-left: 1px solid #dfe1e6;
-        border-right: 1px solid #dfe1e6;
-        border-top: 1px solid #dfe1e6;
-    }
-    .stTabs [aria-selected="true"] {
-        background-color: #0078D4 !important;
-        color: white !important;
-    }
-    h1 {
-        color: #0078D4;
-        font-weight: bold;
-    }
-    h2 {
-        color: #0078D4;
-    }
-    h3 {
-        color: #505050;
-    }
-    .risk-card {
-        padding: 1.5rem;
-        border-radius: 0.5rem;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    
+    h1, h2, h3, h4, h5 {
+        font-family: 'Inter', 'Segoe UI', sans-serif;
+        font-weight: 600;
         margin-bottom: 1rem;
     }
-    .risk-high {
-        background-color: rgba(255, 59, 48, 0.1);
-        border-left: 4px solid #FF3B30;
+    
+    h1 {
+        color: var(--primary);
+        font-weight: 700;
+        letter-spacing: -0.01em;
     }
-    .risk-medium {
-        background-color: rgba(255, 149, 0, 0.1);
-        border-left: 4px solid #FF9500;
+    
+    h2 {
+        color: var(--primary);
+        letter-spacing: -0.01em;
     }
-    .risk-low {
-        background-color: rgba(52, 199, 89, 0.1);
-        border-left: 4px solid #34C759;
+    
+    h3 {
+        color: var(--text-primary);
+        font-size: 1.3rem;
     }
-    .logo-text {
-        font-weight: bold;
-        font-size: 2.5rem;
-        color: #0078D4;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    
+    p, li, span, div {
+        color: var(--text-secondary);
+        line-height: 1.6;
     }
-    .subheader {
-        color: #505050;
-        font-size: 1.2rem;
-        margin-top: -0.8rem;
-        margin-bottom: 1.5rem;
+    
+    /* ===== LAYOUT COMPONENTS ===== */
+    /* Card styling with hover effect */
+    .card {
+        background-color: white;
+        border-radius: var(--radius-md);
+        box-shadow: var(--card-shadow);
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+        transition: var(--transition);
+        border-top: 3px solid transparent;
     }
+    
+    .card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+    }
+    
+    /* Status section styling */
     .status-section {
         background-color: white;
         padding: 1.5rem;
-        border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-        margin-bottom: 1rem;
-    }
-    .map-container {
-        border-radius: 10px;
+        border-radius: var(--radius-md);
+        box-shadow: var(--card-shadow);
+        margin-bottom: 1.2rem;
+        transition: var(--transition);
+        position: relative;
         overflow: hidden;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        border-top: 3px solid var(--primary);
     }
+    
+    .status-section:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+    }
+    
+    /* Risk cards with improved styling */
+    .risk-card {
+        padding: 1.8rem;
+        border-radius: var(--radius-md);
+        box-shadow: var(--card-shadow);
+        margin-bottom: 1.5rem;
+        position: relative;
+        overflow: hidden;
+        transition: var(--transition);
+    }
+    
+    .risk-card:hover {
+        transform: translateY(-2px);
+    }
+    
+    .risk-high {
+        background-color: rgba(244, 67, 54, 0.05);
+        border-left: 4px solid var(--danger);
+    }
+    
+    .risk-medium {
+        background-color: rgba(255, 152, 0, 0.05);
+        border-left: 4px solid var(--warning);
+    }
+    
+    .risk-low {
+        background-color: rgba(76, 175, 80, 0.05);
+        border-left: 4px solid var(--success);
+    }
+    
+    /* Forecast section with improved styling */
     .forecast-section {
-        padding: 1.5rem;
+        padding: 1.8rem;
         background-color: white;
-        border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-        margin-bottom: 1rem;
+        border-radius: var(--radius-md);
+        box-shadow: var(--card-shadow);
+        margin-bottom: 1.5rem;
+        transition: var(--transition);
+        border-top: 3px solid var(--secondary);
     }
+    
+    .forecast-section:hover {
+        box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+    }
+    
+    /* Map container with improved styling */
+    .map-container {
+        border-radius: var(--radius-md);
+        overflow: hidden;
+        box-shadow: var(--card-shadow);
+        border: 1px solid var(--grey-200);
+        height: 100%;
+    }
+    
+    /* ===== COMPONENTS ===== */
+    /* Custom header/logo styling */
+    .app-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--grey-200);
+    }
+    
+    .logo-container {
+        display: flex;
+        align-items: center;
+    }
+    
+    .logo-icon {
+        font-size: 3.5rem;
+        color: var(--primary);
+        margin-right: 1rem;
+        animation: pulse 3s infinite ease-in-out;
+    }
+    
+    .logo-text {
+        font-weight: 800;
+        font-size: 2.8rem;
+        background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 0;
+        letter-spacing: -0.03em;
+    }
+    
+    .subheader {
+        color: var(--grey-600);
+        font-size: 1.0rem;
+        margin-top: -0.5rem;
+        font-weight: 400;
+    }
+    
+    /* Enhanced tabs styling */
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 8px;
+        background-color: var(--grey-100);
+        padding: 6px;
+        border-radius: var(--radius-md);
+        border: 1px solid var(--grey-200);
+        margin-bottom: 1.5rem;
+    }
+    
+    .stTabs [data-baseweb="tab"] {
+        height: 50px;
+        padding: 0 16px;
+        white-space: pre-wrap;
+        font-weight: 500;
+        background-color: transparent;
+        border: none;
+        border-radius: var(--radius-sm);
+        transition: var(--transition);
+        color: var(--grey-700);
+    }
+    
+    .stTabs [data-baseweb="tab"]:hover:not([aria-selected="true"]) {
+        background-color: var(--grey-200);
+        color: var(--text-primary);
+    }
+    
+    .stTabs [aria-selected="true"] {
+        background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%) !important;
+        color: white !important;
+        box-shadow: 0 4px 12px rgba(3, 169, 244, 0.3);
+    }
+    
+    /* Enhanced metric cards */
     .stMetric {
-        background-color: white;
-        padding: 1rem;
-        border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        background: linear-gradient(135deg, #FFF 0%, var(--grey-100) 100%);
+        padding: 1.2rem;
+        border-radius: var(--radius-md);
+        box-shadow: var(--card-shadow);
+        border: 1px solid var(--grey-200);
+        transition: var(--transition);
+        height: 100%;
+    }
+    
+    .stMetric:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+    }
+    
+    .stMetric label {
+        font-weight: 600;
+        font-size: 1rem;
+        color: var(--text-primary);
+    }
+    
+    .stMetric [data-testid="stMetricValue"] {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--primary);
+    }
+    
+    .stMetric [data-testid="stMetricDelta"] {
+        font-size: 0.9rem;
+    }
+    
+    /* Animations */
+    @keyframes pulse {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.05);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+    
+    .animate-in {
+        animation: fadeInUp 0.6s ease forwards;
+    }
+    
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 </style>
 """, unsafe_allow_html=True)
+# Add after the CSS block (around line 109)
+def create_custom_plotly_theme():
+    """Create a custom theme for Plotly figures"""
+    return {
+        'layout': {
+            'font': {
+                'family': 'Inter, Arial, sans-serif',
+                'size': 12,
+                'color': '#3E4C59'
+            },
+            'title': {
+                'font': {
+                    'family': 'Inter, Arial, sans-serif',
+                    'size': 18,
+                    'color': '#323F4B'
+                }
+            },
+            'plot_bgcolor': 'rgba(0,0,0,0)',
+            'paper_bgcolor': 'rgba(0,0,0,0)',
+            'colorway': ['#0455BF', '#03A9F4', '#1DE9B6', '#FF9800', '#F44336', 
+                         '#4CAF50', '#9C27B0', '#FFEB3B', '#795548', '#607D8B'],
+            'xaxis': {
+                'gridcolor': '#E4E7EB',
+                'linecolor': '#CBD2D9',
+                'zerolinecolor': '#CBD2D9',
+            },
+            'yaxis': {
+                'gridcolor': '#E4E7EB',
+                'linecolor': '#CBD2D9',
+                'zerolinecolor': '#CBD2D9',
+            },
+        }
+    }
 
+# Apply theme to all Plotly figures
+import plotly.io as pio
+pio.templates["custom"] = create_custom_plotly_theme()
+pio.templates.default = "plotly_white+custom"
+
+# Add after the theme function (around line 119)
+def enhanced_metric_card(label, value, delta=None, delta_color="normal", icon=None, theme_color=None):
+    """
+    Creates an enhanced metric card with icon and styling
+    """
+    # Set default theme color if none provided
+    if theme_color is None:
+        theme_color = "#0455BF"
+    
+    # Set icon if none provided
+    if icon is None:
+        icon = "📊"
+        
+    # Handle delta display and color
+    delta_html = ""
+    if delta is not None:
+        delta_icon = "↗" if delta.startswith("+") else "↘" if delta.startswith("-") else "→"
+        delta_color_css = "#4CAF50" if delta_color == "normal" and delta.startswith("+") else \
+                          "#F44336" if delta_color == "normal" and delta.startswith("-") else \
+                          "#4CAF50" if delta_color == "inverse" and delta.startswith("-") else \
+                          "#F44336" if delta_color == "inverse" and delta.startswith("+") else \
+                          "#9AA5B1"
+        delta_html = f"""
+        <div style="font-size: 0.9rem; color: {delta_color_css}; font-weight: 500; display: flex; align-items: center; margin-top: 5px;">
+            {delta_icon} {delta}
+        </div>
+        """
+    
+    # Create the HTML for the card
+    html = f"""
+    <div style="background: linear-gradient(135deg, white 0%, #f5f7fb 100%); padding: 1.2rem; border-radius: 10px; 
+                box-shadow: 0 4px 20px rgba(0,0,0,0.08); border-top: 3px solid {theme_color}; transition: all 0.3s ease;">
+        <div style="display: flex; align-items: center; margin-bottom: 8px;">
+            <div style="background: linear-gradient(135deg, {theme_color} 0%, {adjust_color_brightness(theme_color, 1.2)} 100%); 
+                       color: white; border-radius: 8px; height: 32px; width: 32px; display: flex; 
+                       align-items: center; justify-content: center; margin-right: 10px; font-size: 18px;">
+                {icon}
+            </div>
+            <div style="font-size: 1rem; color: #52606D; font-weight: 600;">{label}</div>
+        </div>
+        <div style="font-size: 1.8rem; font-weight: 700; color: #1A202C;">{value}</div>
+        {delta_html}
+    </div>
+    """
+    
+    return st.markdown(html, unsafe_allow_html=True)
+
+def adjust_color_brightness(hex_color, factor):
+    """Helper function to adjust color brightness for gradients"""
+    # Convert hex to RGB
+    h = hex_color.lstrip('#')
+    rgb = tuple(int(h[i:i+2], 16) for i in (0, 2, 4))
+    
+    # Adjust brightness
+    rgb_adjusted = [min(255, int(c * factor)) for c in rgb]
+    
+    # Convert back to hex
+    return '#{:02x}{:02x}{:02x}'.format(rgb_adjusted[0], rgb_adjusted[1], rgb_adjusted[2])
 # ----------------------------
 # Header and Logo
 # ----------------------------
-# Creating columns for logo and title
-col_logo, col_title = st.columns([1, 4])  # Fixed missing bracket
+col_logo, col_title = st.columns([1, 4])
 
 with col_logo:
     st.markdown("""
-    <div style="text-align: left;">
-        <span style="font-size: 6rem;">❄️</span>  <!-- Increased icon size -->
+    <div style="text-align: left; margin-top: -15px; padding-top: 0;">
+        <span style="font-size: 6rem;">❄️</span>
     </div>
     """, unsafe_allow_html=True)
 
 with col_title:
     st.markdown("""
-    <div style="text-align: left;">
-        <p style="font-size: 3rem; font-weight: bold; margin-bottom: 0;">IceWatch</p>
-        <p style="font-size: 1.5rem; color: gray;">Advanced Glacier Monitoring & GLOF Risk Assessment</p>
+    <div style="text-align: left; margin-top: -15px; padding-top: 0;">
+        <p style="font-size: 3rem; font-weight: bold; margin-bottom: 0; line-height: 1.1;">IceWatch</p>
+        <p style="font-size: 1.5rem; color: gray; margin-top: 0;">Advanced Glacier Monitoring & GLOF Risk Assessment</p>
     </div>
     """, unsafe_allow_html=True)
 # ----------------------------
@@ -143,8 +435,8 @@ with col_title:
 # ----------------------------
 @st.cache_resource
 def load_models():
-    vel_model, device = load_model("dashboard/models/terraflow_transformer_model.pth")
-    temp_model, temp_scaler = load_tempflow("dashboard/models/best_tempflow_model.keras", "dashboard/models/scaler_tempflow.save")
+    vel_model, device = load_model("models/terraflow_v3_19M.pth")
+    temp_model, temp_scaler = load_tempflow("models/best_tempflow_model.keras", "models/scaler_tempflow.save")
     return vel_model, device, temp_model, temp_scaler
 
 vel_model, device, temp_model, temp_scaler = load_models()
@@ -153,7 +445,7 @@ vel_model, device, temp_model, temp_scaler = load_models()
 # Sidebar – Enhanced with location presets
 # ----------------------------
 with st.sidebar:
-    st.image("https://via.placeholder.com/300x100.png?text=IceWatch+Logo", use_container_width=True)
+    st.image("https://pawilds.com/wp-content/uploads/2023/01/Snowflake_macro_photography_1.jpg", use_container_width=True)
     st.markdown("---")
     
     st.header("📍 Location")
@@ -165,9 +457,9 @@ with st.sidebar:
         index=0
     )
     
-    # Set default coordinates based on preset
+    # Set default coordinates based on  lat, lon
     if location_preset == "Shishper Glacier, Pakistan":
-        default_lat, default_lon = 74.4912, 36.39861
+        default_lat, default_lon = 36.4053, 74.7654
     elif location_preset == "Khurdopin Glacier":
         default_lat, default_lon = 75.45967, 36.35835
     elif location_preset == "Passu Glacier":
@@ -276,7 +568,7 @@ def predict_velocity(model, device, summary_df, target_time, lat, lon):
         print(f"Reached end of loop, returning last prediction for {current_date}")
         return pred
     
-def get_velocity_forecast(days=7):
+def get_velocity_forecast(days=14):
     try:
         with st.spinner("Fetching velocity data..."):
             summary_df = get_velocity_data(lat, lon)
@@ -308,9 +600,53 @@ def get_velocity_forecast(days=7):
         print(f"Error in get_velocity_forecast: {str(e)}")  # Debug
         return None
     
-def get_temperature_forecast(days=7):
+# def get_temperature_forecast(days=14):
+#     """
+#     Generates a 7-day forecast for surface temperature.
+#     """
+#     try:
+#         with st.spinner("Fetching historical temperature data..."):
+#             today = datetime.datetime.today().date()
+#             safe_date = today  # using today for historical cutoff
+#             temps, dates = get_past_temperatures(lat, lon, safe_date)
+        
+#         if not temps or not dates:
+#             st.error("No historical temperature data available.")
+#             return None
+        
+#         last_available_date = pd.to_datetime(dates[-1])
+#         predicted_temps = list(temps)
+#         predicted_dates = list(pd.to_datetime(dates))
+#         forecast = []
+#         with st.spinner(f"Predicting temperature for next {days} days..."):
+#             for _ in range(days):
+#                 sequence = prepare_input_sequence(predicted_temps, predicted_dates, temp_scaler, lat, lon)
+#                 next_date = last_available_date + timedelta(days=1)
+#                 prediction = predict_future(
+#                     temp_model,
+#                     sequence,
+#                     next_date,
+#                     next_date,
+#                     temp_scaler,
+#                     lat,
+#                     lon
+#                 )
+#                 if not prediction:
+#                     st.error("Temperature prediction failed.")
+#                     return None
+#                 pred_val = prediction[-1][1]
+#                 forecast.append((next_date, pred_val))
+#                 predicted_temps.append(pred_val)
+#                 last_available_date = next_date
+#                 predicted_dates.append(last_available_date)
+#         return forecast
+#     except Exception as e:
+#         st.error(f"Temperature forecast failed: {str(e)}")
+#         return None
+
+def get_temperature_forecast(days=14):
     """
-    Generates a 7-day forecast for surface temperature.
+    Generates a forecast for surface temperature for the specified number of days.
     """
     try:
         with st.spinner("Fetching historical temperature data..."):
@@ -326,32 +662,47 @@ def get_temperature_forecast(days=7):
         predicted_temps = list(temps)
         predicted_dates = list(pd.to_datetime(dates))
         forecast = []
+        
+        # Debug info
+        print(f"Starting temp forecast for {days} days from {last_available_date}")
+        
         with st.spinner(f"Predicting temperature for next {days} days..."):
-            for _ in range(days):
+            # Start with tomorrow and forecast for the requested number of days
+            forecast_start = datetime.datetime.today() + timedelta(days=1)
+            
+            for i in range(days):
+                target_date = forecast_start + timedelta(days=i)
                 sequence = prepare_input_sequence(predicted_temps, predicted_dates, temp_scaler, lat, lon)
-                next_date = last_available_date + timedelta(days=1)
+                
                 prediction = predict_future(
                     temp_model,
                     sequence,
-                    next_date,
-                    next_date,
+                    target_date,
+                    target_date,
                     temp_scaler,
                     lat,
                     lon
                 )
+                
                 if not prediction:
-                    st.error("Temperature prediction failed.")
-                    return None
+                    st.error(f"Temperature prediction failed for {target_date}.")
+                    continue
+                    
                 pred_val = prediction[-1][1]
-                forecast.append((next_date, pred_val))
+                print(f"Temperature forecast for {target_date}: {pred_val}")
+                forecast.append((target_date, pred_val))
+                
+                # Update for next iteration
                 predicted_temps.append(pred_val)
-                last_available_date = next_date
-                predicted_dates.append(last_available_date)
+                predicted_dates.append(target_date)
+                
+        print(f"Temperature forecast completed, days: {len(forecast)}")
         return forecast
     except Exception as e:
         st.error(f"Temperature forecast failed: {str(e)}")
+        print(f"Error in get_temperature_forecast: {str(e)}")  # Debug
         return None
-
+    
 # ----------------------------
 # Tabbed Layout with Enhanced Styling
 # ----------------------------
@@ -364,6 +715,7 @@ tabs = st.tabs([
 
 
 # In Tab 2
+# --- Tab 2: Forecast & History - Fixed Version ---
 with tabs[1]:
     colored_header(
         label="Forecast & Historical Trends",
@@ -371,15 +723,12 @@ with tabs[1]:
         color_name="blue-70"
     )
     
+    # Keep only one forecast section (remove the duplicate)
     st.markdown('<div class="forecast-section">', unsafe_allow_html=True)
     st.subheader(f"{forecast_days}-Day Forecast")
     
-    # Fetch velocity forecast
     velocity_forecast = get_velocity_forecast(forecast_days)
     temperature_forecast = get_temperature_forecast(forecast_days)
-    
-    # Debug: Check the raw forecast data
-    print(f"Tab 1 - velocity_forecast: {velocity_forecast}")
     
     fig = make_subplots(specs=[[{"secondary_y": True}]])
     plot_has_data = False
@@ -388,7 +737,7 @@ with tabs[1]:
     if velocity_forecast:
         df_vel_forecast = pd.DataFrame(velocity_forecast, columns=["Date", "Velocity"])
         df_vel_forecast["Date"] = pd.to_datetime(df_vel_forecast["Date"])
-        print(f"Tab 1 - df_vel_forecast: {df_vel_forecast}")  # Debug
+        print(f"df_vel_forecast: {df_vel_forecast}")  # Debug
         if not df_vel_forecast.empty and df_vel_forecast["Velocity"].notna().any():
             fig.add_trace(
                 go.Scatter(
@@ -410,7 +759,7 @@ with tabs[1]:
     if temperature_forecast:
         df_temp_forecast = pd.DataFrame(temperature_forecast, columns=["Date", "Temperature"])
         df_temp_forecast["Date"] = pd.to_datetime(df_temp_forecast["Date"])
-        print(f"Tab 1 - df_temp_forecast: {df_temp_forecast}")  # Debug
+        print(f"df_temp_forecast: {df_temp_forecast}")  # Debug
         if not df_temp_forecast.empty and df_temp_forecast["Temperature"].notna().any():
             fig.add_trace(
                 go.Scatter(
@@ -454,24 +803,31 @@ with tabs[1]:
             paper_bgcolor="rgba(0,0,0,0)",
             font=dict(family="Arial", size=14)
         )
+        
+        # Set fixed ranges for better visualization
         fig.update_yaxes(
             title_text="Ice Velocity (m/yr)",
             secondary_y=False,
             showgrid=True,
             gridcolor="rgba(200,200,200,0.3)",
-            title_font=dict(color="#0078D4")
+            title_font=dict(color="#0078D4"),
+            range=[0, 200],  # Set appropriate range for velocity
+            tickformat=".0f"
         )
+        
         fig.update_yaxes(
             title_text="Temperature (°C)",
             secondary_y=True,
             showgrid=False,
-            title_font=dict(color="#FF9500")
+            title_font=dict(color="#FF9500"),
+            range=[-15, 15],  # Set appropriate range for temperature
+            tickformat=".1f"
         )
+        
         fig.update_xaxes(
             title_text="Date",
             showgrid=True,
-            gridcolor="rgba(200,200,200,0.3)",
-            rangeslider_visible=True
+            gridcolor="rgba(200,200,200,0.3)"
         )
         fig.add_annotation(
             x=0.5,
@@ -488,6 +844,14 @@ with tabs[1]:
     
     st.markdown('</div>', unsafe_allow_html=True)
 
+    # Historical Data Section - Keep this part
+    colored_header(
+        label="Historical Trends",
+        description="Long-term patterns and anomalies",
+        color_name="blue-70"
+    )
+    
+    col_hist1, col_hist2 = st.columns(2)
 def get_temperature_prediction():
     """
     Automatically fetches historical temperature data and forecasts the temperature for tomorrow.
@@ -540,46 +904,31 @@ def get_temperature_prediction():
 # ----------------------------
 # Enhanced Risk Assessment Function
 # ----------------------------
-def calculate_glof_risk(velocity, temperature):
+
+from torrentflow import download_image, load_and_predict
+import os
+
+# Define MODEL_PATH using absolute path
+MODEL_PATH = os.path.join(os.getcwd(), "models/torrentflow/CHILL")
+FILE_ID = '1GEG8lmja5M6R7d_YSsG6s3zZJlYqTC6j'  # Google Drive file ID
+DOWNLOAD_NAME = 'latest_image.tif'
+IMAGE_PATH = f'models/torrentflow/tiff_imagery_for_cnn/{DOWNLOAD_NAME}'
+
+def calculate_glof_risk(FILE_ID, IMAGE_PATH):
     """
     Calculate GLOF risk based on velocity and temperature.
     Returns risk level (low, medium, high) and a percentage.
     """
-    # Baseline risk (50%)
-    risk_percent = 50.0
-    
-    # Velocity factor (higher velocity = higher risk)
-    # Assuming normal velocity range is 40-90 m/yr
-    if velocity < 60:
-        velocity_factor = -10  # Lower risk
-    elif 60 <= velocity < 90:
-        velocity_factor = 0    # Neutral
-    elif 90 <= velocity < 120:
-        velocity_factor = 15   # Higher risk
-    else:
-        velocity_factor = 30   # Much higher risk
-    
-    # Temperature factor (higher temp = higher risk due to melting)
-    # Assuming temperature range of -10 to +10°C
-    if temperature < -5:
-        temp_factor = -15      # Lower risk
-    elif -5 <= temperature < 0:
-        temp_factor = -5       # Slightly lower risk
-    elif 0 <= temperature < 5:
-        temp_factor = 10       # Higher risk
-    else:
-        temp_factor = 20       # Much higher risk
-    
-    # Combine factors (could add more factors in the future)
-    risk_percent += velocity_factor + temp_factor
-    
-    # Ensure risk is between 0-100%
-    risk_percent = max(0, min(100, risk_percent))
+    # Download the latest image
+    download_image(FILE_ID, IMAGE_PATH)
+    prediction = load_and_predict(IMAGE_PATH)
+    risk_percent = prediction * 100  # Convert to percentage
+
     
     # Determine risk level
-    if risk_percent < 40:
+    if risk_percent < 50:
         return "Low", risk_percent
-    elif 40 <= risk_percent < 70:
+    elif 50 <= risk_percent < 80:
         return "Medium", risk_percent
     else:
         return "High", risk_percent
@@ -587,40 +936,52 @@ def calculate_glof_risk(velocity, temperature):
 # ----------------------------
 # Map Generation Function - Enhanced
 # ----------------------------
+# Replace generate_glacier_map function (around lines 351-400) with:
 def generate_glacier_map(lat, lon):
-    """Generate map centered on monitoring point"""
+    """Generate enhanced map centered on monitoring point"""
     m = folium.Map(
-        location=[lat, lon],  # Use current coordinates
-        zoom_start=12,
-        tiles="CartoDB positron"
+        location=[36.345, 74.8045],
+        zoom_start=7,
+        tiles="Cartodb Positron"
     )
     
-    # Update polygon coordinates relative to current position
+    # Add custom styles
+    folium.TileLayer(
+        tiles='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+        attr='Esri',
+        name='Satellite',
+        overlay=False
+    ).add_to(m)
+    
+    # Add polygon
     polygon_coords = [
-        [lat - 0.1, lon - 0.1],
-        [lat - 0.1, lon + 0.1],
-        [lat + 0.1, lon + 0.1],
-        [lat + 0.1, lon - 0.1],
-        [lat - 0.1, lon - 0.1]
+        [36.345 - 0.1, 74.8045 - 0.1],
+        [36.345 - 0.1, 74.8045 + 0.1],
+        [36.345 + 0.1, 74.8045 + 0.1],
+        [36.345 + 0.1, 74.8045 - 0.1],
+        [36.345 - 0.1, 74.8045 - 0.1]
     ]
     
     folium.Polygon(
         locations=polygon_coords,
-        color="#0078D4",
+        color="#0455BF",
+        weight=2,
         fill=True,
-        fill_color="#0078D4",
-        fill_opacity=0.4,
-        tooltip="Glacier Area"
+        fill_color="#0455BF",
+        fill_opacity=0.2,
+        tooltip="<strong>Glacier Area</strong>",
+        popup=folium.Popup("Main Glacier Body", max_width=200)
     ).add_to(m)
     
-    # Add current monitoring point marker
+    # Add marker with custom icon
     folium.Marker(
-        location=[lat, lon],
-        tooltip="Current Monitoring Point",
+        location=[36.345, 74.8045],
+        tooltip="<strong>Current Monitoring Point</strong>",
+        popup=folium.Popup(f"Lat: {lat}<br>Lon: {lon}", max_width=300),
         icon=folium.Icon(color="red", icon="info-sign")
     ).add_to(m)
     
-    # Add potential danger zones
+    # Add danger zones with improved styling
     danger_zone = [
         [lat - 0.32, lon + 0.15],
         [lat - 0.40, lon + 0.20],
@@ -633,32 +994,19 @@ def generate_glacier_map(lat, lon):
     
     folium.Polygon(
         locations=danger_zone,
-        color="#FF3B30",
+        color="#F44336",
+        weight=2,
         fill=True,
-        fill_color="#FF3B30",
+        fill_color="#F44336",
         fill_opacity=0.3,
-        tooltip="Potential GLOF Impact Zone"
+        tooltip="<strong>Potential GLOF Impact Zone</strong>"
     ).add_to(m)
     
-    # Add glacial lake
-    folium.Circle(
-        location=[lat - 0.32, lon + 0.04],
-        radius=500,  # meters
-        color="#1E88E5",
-        fill=True,
-        fill_color="#1E88E5",
-        fill_opacity=0.6,
-        tooltip="Glacial Lake"
-    ).add_to(m)
-    
-    # Add layer control
+    # Add layer control and plugins
     folium.LayerControl().add_to(m)
-    
-    # Add scale
     folium.plugins.MeasureControl(position='bottomleft', primary_length_unit='kilometers').add_to(m)
     
     return m
-
 # --- Tab 1: Dashboard - Enhanced ---
 with tabs[0]:
     colored_header(
@@ -669,7 +1017,7 @@ with tabs[0]:
     col1, col2, col3 = st.columns(3)
     
     with col1:
-        st.markdown('<div class="status-section">', unsafe_allow_html=True)
+        # st.markdown('<div class="status-section">', unsafe_allow_html=True)
         st.subheader("🧊 Ice Velocity (Tomorrow)")
         result = get_velocity_prediction()
         if result:
@@ -678,7 +1026,7 @@ with tabs[0]:
                 st.metric(
                     label="Predicted Velocity",
                     value=f"{velocity:.2f} m/yr",
-                    delta=f"{velocity - 85.65:.2f} m/yr",
+                    delta=f"Any value > 200m/yr is dangerous.",
                     delta_color="inverse"
                 )
                 st.caption(f"Forecast for {pd.to_datetime(timestamp).strftime('%Y-%m-%d %H:%M')}")
@@ -710,10 +1058,10 @@ with tabs[0]:
                 st.error("Velocity prediction returned None.")
         else:
             st.error("Velocity prediction unavailable.")
-        st.markdown('</div>', unsafe_allow_html=True)
+        # st.markdown('</div>', unsafe_allow_html=True)
         
     with col2:
-        st.markdown('<div class="status-section">', unsafe_allow_html=True)
+        # st.markdown('<div class="status-section">', unsafe_allow_html=True)
         st.subheader("🌡️ Surface Temperature (Tomorrow)")
         temp_pred = get_temperature_prediction()
         if temp_pred is not None:
@@ -726,37 +1074,36 @@ with tabs[0]:
             tomorrow = datetime.datetime.today() + timedelta(days=1)
             st.caption(f"Forecast for {tomorrow.strftime('%Y-%m-%d')}")
             
-            # Add mini temperature trend (already present)
-            last_temps = [-3.2, -2.8, -2.1, temp_pred]
-            temp_dates = [
-                (datetime.datetime.today() - timedelta(days=3)).strftime('%Y-%m-%d'),
-                (datetime.datetime.today() - timedelta(days=2)).strftime('%Y-%m-%d'),
-                (datetime.datetime.today() - timedelta(days=1)).strftime('%Y-%m-%d'),
-                tomorrow.strftime('%Y-%m-%d')
-            ]
-            mini_temp_df = pd.DataFrame({
-                "Date": temp_dates,
-                "Temperature": last_temps
-            })
-            fig_temp = px.line(mini_temp_df, x="Date", y="Temperature", markers=True)
-            fig_temp.update_layout(
-                height=150,
-                margin=dict(l=0, r=0, t=0, b=0),
-                yaxis=dict(title=None),
-                xaxis=dict(title=None),
-                paper_bgcolor="rgba(0,0,0,0)",
-                plot_bgcolor="rgba(0,0,0,0)"
-            )
-            fig_temp.update_traces(line_color="#FF9500")
-            st.plotly_chart(fig_temp, use_container_width=True)
-        else:
-            st.error("Temperature prediction unavailable.")
-        st.markdown('</div>', unsafe_allow_html=True)
-        
+            # Add mini temperature trend with actual forecast data
+            mini_temp_forecast = get_temperature_forecast(min(forecast_days, 7))  # Get up to 7 days
+            if mini_temp_forecast:
+                mini_temp_df = pd.DataFrame(mini_temp_forecast, columns=["Date", "Temperature"])
+                mini_temp_df["Date"] = pd.to_datetime(mini_temp_df["Date"]).dt.strftime('%Y-%m-%d')
+                
+                # Prepend today's data point
+                mini_temp_df = pd.DataFrame({
+                    "Date": [datetime.datetime.today().strftime('%Y-%m-%d')] + list(mini_temp_df["Date"]),
+                    "Temperature": [temp_pred] + list(mini_temp_df["Temperature"])
+                })
+                
+                fig_temp = px.line(mini_temp_df, x="Date", y="Temperature", markers=True)
+                fig_temp.update_layout(
+                    height=150,
+                    margin=dict(l=0, r=0, t=0, b=0),
+                    yaxis=dict(title=None),
+                    xaxis=dict(title=None),
+                    paper_bgcolor="rgba(0,0,0,0)",
+                    plot_bgcolor="rgba(0,0,0,0)"
+                )
+                fig_temp.update_traces(line_color="#FF9500")
+                st.plotly_chart(fig_temp, use_container_width=True)
+            else:
+                st.warning("Unable to generate temperature forecast trend.")
+        # st.markdown('</div>', unsafe_allow_html=True)
     with col3:
         if result and temp_pred is not None:
             velocity_val, _ = result
-            risk_level, risk_percent = calculate_glof_risk(velocity_val, temp_pred)
+            risk_level, risk_percent = calculate_glof_risk(FILE_ID, IMAGE_PATH)
             
             risk_class = ""
             if risk_level == "High":
@@ -766,7 +1113,7 @@ with tabs[0]:
             else:
                 risk_class = "risk-low"
             
-            st.markdown(f'<div class="status-section {risk_class}">', unsafe_allow_html=True)
+            # st.markdown(f'<div class="status-section {risk_class}">', unsafe_allow_html=True)
             st.subheader("⚠️ GLOF Risk Assessment")
             
             fig = go.Figure(go.Indicator(
@@ -810,7 +1157,7 @@ with tabs[0]:
                 factors.append("- No critical factors detected")
             for factor in factors:
                 st.markdown(factor)
-            st.markdown('</div>', unsafe_allow_html=True)
+            # st.markdown('</div>', unsafe_allow_html=True)
         else:
             st.error("Risk assessment unavailable - requires velocity and temperature data.")
     
@@ -920,6 +1267,8 @@ with tabs[1]:
     else:
         st.error("Temperature forecast unavailable")
     
+# In the Forecast & Trends tab, after creating the plot but before displaying it:
+
     if plot_has_data:
         fig.update_layout(
             title=f"{forecast_days}-Day Forecast: Ice Velocity vs Temperature",
@@ -937,24 +1286,31 @@ with tabs[1]:
             paper_bgcolor="rgba(0,0,0,0)",
             font=dict(family="Arial", size=14)
         )
+        
+        # Set fixed ranges for better visualization
         fig.update_yaxes(
             title_text="Ice Velocity (m/yr)",
             secondary_y=False,
             showgrid=True,
             gridcolor="rgba(200,200,200,0.3)",
-            title_font=dict(color="#0078D4")
+            title_font=dict(color="#0078D4"),
+            range=[0, 200],  # Set appropriate range for velocity
+            tickformat=".0f"
         )
+        
         fig.update_yaxes(
             title_text="Temperature (°C)",
             secondary_y=True,
             showgrid=False,
-            title_font=dict(color="#FF9500")
+            title_font=dict(color="#FF9500"),
+            range=[-15, 15],  # Set appropriate range for temperature
+            tickformat=".1f"
         )
+        
         fig.update_xaxes(
             title_text="Date",
             showgrid=True,
-            gridcolor="rgba(200,200,200,0.3)",
-            rangeslider_visible=True
+            gridcolor="rgba(200,200,200,0.3)"
         )
         fig.add_annotation(
             x=0.5,
@@ -1079,6 +1435,8 @@ with tabs[2]:
     st.markdown("</div>", unsafe_allow_html=True)
 
 # --- Tab 4: About GLOFs - Enhanced ---
+# --- Tab 4: About GLOFs - Enhanced ---
+# --- Tab 4: About GLOFs - Fixed Version ---
 with tabs[3]:
     colored_header(
         label="Glacial Lake Outburst Floods",
@@ -1086,39 +1444,141 @@ with tabs[3]:
         color_name="blue-70"
     )
     
+    # First section - Introduction
     st.markdown("""
-    <div class="forecast-section" style="padding: 2rem;">
-        <div class="risk-card risk-high">
-            <h3>❄️ What are GLOFs?</h3>
-            <p>Glacial Lake Outburst Floods (GLOFs) occur when water dammed by a glacier is released suddenly. These events can:</p>
+    <div class="forecast-section">
+        <h2>What are Glacial Lake Outburst Floods?</h2>
+        <p>Glacial Lake Outburst Floods (GLOFs) are sudden releases of water from a glacial lake that can cause catastrophic flooding downstream. They occur when lakes formed by melting glaciers are compromised by various triggering factors.</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Second section - Causes
+    st.markdown("""
+    <div class="forecast-section">
+        <h3>Causes of GLOFs</h3>
+        <ul>
+            <li><b>Glacier Retreat and Lake Formation:</b> As glaciers melt and retreat due to climate change, they often leave behind depressions that fill with meltwater, forming glacial lakes.</li>
+            <li><b>Moraine Dam Failure:</b> Many glacial lakes are dammed by unstable moraines (debris deposited by glaciers), which can fail due to erosion or overtopping.</li>
+            <li><b>Ice Avalanches:</b> Large chunks of ice falling into a glacial lake can create displacement waves that overtop and potentially breach the dam.</li>
+            <li><b>Seismic Activity:</b> Earthquakes can destabilize moraine dams or cause landslides into the lake.</li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Third section - Impact Zones
+    st.markdown("<h3>Impact Zones and Risk Factors</h3>", unsafe_allow_html=True)
+    risk_col1, risk_col2 = st.columns(2)
+    
+    with risk_col1:
+        st.markdown("""
+        <div style="background-color: rgba(244, 67, 54, 0.1); border-left: 4px solid #F44336; padding: 20px; border-radius: 8px; height: 100%;">
+            <h4 style="color: #F44336;">High Risk Zones</h4>
             <ul>
-                <li>Release millions of cubic meters of water in hours</li>
-                <li>Travel downstream at 60+ km/h</li>
-                <li>Destroy infrastructure 100+ km from source</li>
+                <li>Communities within 5-10 km downstream</li>
+                <li>Areas in narrow valleys below glacial lakes</li>
+                <li>Infrastructure near river channels</li>
             </ul>
         </div>
-        
-        <div class="risk-card risk-medium" style="margin-top: 2rem;">
-            <h3>📈 Regional Risk Factors</h3>
-            <div class="stMetric">
-                <div class="metric-value">+2.3°C</div>
-                <div class="metric-delta">Temperature rise since 1990</div>
-            </div>
-            <div class="stMetric">
-                <div class="metric-value">42%</div>
-                <div class="metric-delta">Increase in glacial lakes (2000-2020)</div>
-            </div>
-        </div>
-        
-        <div class="risk-card risk-low" style="margin-top: 2rem;">
-            <h3>🛡️ Mitigation Strategies</h3>
-            <p>Early warning systems like IceWatch help communities:</p>
+        """, unsafe_allow_html=True)
+    
+    with risk_col2:
+        st.markdown("""
+        <div style="background-color: rgba(255, 152, 0, 0.1); border-left: 4px solid #FF9800; padding: 20px; border-radius: 8px; height: 100%;">
+            <h4 style="color: #FF9800;">Warning Signs</h4>
             <ul>
-                <li>Detect precursor signals 24-72 hours in advance</li>
-                <li>Activate emergency response protocols</li>
-                <li>Evacuate vulnerable populations</li>
+                <li>Rapid glacier velocity changes</li>
+                <li>Sustained high temperatures</li>
+                <li>Visible cracks in ice dams</li>
+                <li>Sudden changes in lake turbidity</li>
             </ul>
         </div>
+        """, unsafe_allow_html=True)
+    
+    # Fourth section - Early Warning Systems
+    st.markdown("""
+    <div class="forecast-section">
+        <h3>GLOF Early Warning Systems</h3>
+        <p>Effective early warning systems for GLOFs typically include:</p>
+        <ol>
+            <li><b>Monitoring:</b> Real-time monitoring of glacial lakes using satellite imagery, ground sensors, and advanced models like those used in IceWatch.</li>
+            <li><b>Analysis:</b> Processing data through AI models to detect risk patterns and triggering events.</li>
+            <li><b>Communication:</b> Rapid notification systems to alert communities and authorities.</li>
+            <li><b>Response:</b> Evacuation plans and emergency procedures for potentially affected areas.</li>
+        </ol>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Fifth section - Case Study
+    st.markdown("""
+    <div style="background-color: rgba(3, 169, 244, 0.1); border-radius: 8px; padding: 20px; margin: 20px 0; border-left: 4px solid #03A9F4;">
+        <h3 style="color: #03A9F4;">Case Study: Shishper Glacier GLOF Events</h3>
+        <p>The Shishper Glacier in Pakistan has experienced multiple GLOF events in recent years:</p>
+        <ul>
+            <li><b>May 2019:</b> A major GLOF event caused significant damage to infrastructure and farmland.</li>
+            <li><b>June 2022:</b> Another large outburst flood disrupted communities in the Hunza Valley.</li>
+            <li><b>April 2024:</b> Early detection through monitoring systems allowed for successful evacuations.</li>
+        </ul>
+        <p>These events highlight the importance of continuous monitoring and early warning systems.</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Sixth section - Mitigation Strategies
+    st.markdown("<h3>Mitigation Strategies</h3>", unsafe_allow_html=True)
+    mit_col1, mit_col2 = st.columns(2)
+    
+    with mit_col1:
+        st.markdown("""
+        <div style="background-color: rgba(76, 175, 80, 0.1); padding: 15px; border-radius: 8px; height: 100%;">
+            <h4 style="color: #4CAF50;">Structural Measures</h4>
+            <ul>
+                <li>Artificial lowering of lake levels</li>
+                <li>Construction of outlet channels</li>
+                <li>Reinforcement of natural moraine dams</li>
+            </ul>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with mit_col2:
+        st.markdown("""
+        <div style="background-color: rgba(156, 39, 176, 0.1); padding: 15px; border-radius: 8px; height: 100%;">
+            <h4 style="color: #9C27B0;">Non-Structural Measures</h4>
+            <ul>
+                <li>Community education and awareness</li>
+                <li>Hazard mapping and zoning</li>
+                <li>Early warning systems like IceWatch</li>
+                <li>Emergency response planning</li>
+            </ul>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    # Seventh section - Remote Sensing
+    st.markdown("""
+    <div class="forecast-section">
+        <h3>The Role of Remote Sensing</h3>
+        <p>Modern GLOF monitoring relies heavily on satellite data and remote sensing technologies:</p>
+        <ul>
+            <li>Optical satellite imagery for visual monitoring</li>
+            <li>SAR (Synthetic Aperture Radar) for all-weather monitoring</li>
+            <li>Digital Elevation Models for topographic analysis</li>
+            <li>Thermal imaging for temperature analysis</li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Eighth section - Diagram
+    st.image("https://via.placeholder.com/800x400.png?text=GLOF+Monitoring+Process", 
+             caption="Diagram showing the GLOF monitoring and early warning process", 
+             use_column_width=True)
+    
+    # Ninth section - Resources
+    st.markdown("""
+    <div class="forecast-section">
+        <h3>Further Resources</h3>
+        <ul>
+            <li><a href="https://www.icimod.org/mountain/glacial-lakes-outburst-floods/">ICIMOD - Glacial Lakes and Outburst Floods</a></li>
+            <li><a href="https://www.preventionweb.net/understanding-disaster-risk/key-concepts/glacial-lake-outburst-floods">PreventionWeb - Understanding GLOF Risk</a></li>
+            <li><a href="https://www.usgs.gov/special-topics/water-science-school/science/glaciers-and-icecaps">USGS - Glaciers and Ice Caps</a></li>
+        </ul>
     </div>
     """, unsafe_allow_html=True)
 
@@ -1126,6 +1586,7 @@ with tabs[3]:
 # Final Touches
 # ----------------------------
 # Add footer
+# Replace footer section (last few lines) with:
 st.markdown("""
 <div style="text-align: center; padding: 2rem; margin-top: 2rem; border-top: 1px solid #E4E7EB;">
     <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 15px;">
