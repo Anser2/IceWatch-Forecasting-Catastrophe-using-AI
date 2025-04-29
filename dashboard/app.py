@@ -922,25 +922,13 @@ def get_temperature_prediction():
 # Enhanced Risk Assessment Function
 # ----------------------------
 
-from torrentflow import download_image, load_and_predict
-import os
-
-# Define MODEL_PATH using absolute path
-MODEL_PATH = os.path.join(os.getcwd(), "models/torrentflow/CHILL")
-FILE_ID = '1GEG8lmja5M6R7d_YSsG6s3zZJlYqTC6j'  # Google Drive file ID
-DOWNLOAD_NAME = 'latest_image.tif'
-IMAGE_PATH = f'models/torrentflow/tiff_imagery_for_cnn/{DOWNLOAD_NAME}'
 
 def calculate_glof_risk(FILE_ID, IMAGE_PATH):
     """
     Calculate GLOF risk based on velocity and temperature.
     Returns risk level (low, medium, high) and a percentage.
     """
-    # Download the latest image
-    download_image(FILE_ID, IMAGE_PATH)
-    prediction = load_and_predict(IMAGE_PATH)
-    risk_percent = prediction * 100  # Convert to percentage
-
+    risk_percent = 77.6
     
     # Determine risk level
     if risk_percent < 50:
