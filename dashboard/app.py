@@ -8,7 +8,7 @@ from plotly.subplots import make_subplots
 import folium
 from streamlit_folium import folium_static
 import datetime
-from dateime import timedelta
+from datetime import timedelta
 from terraflow import load_model, get_velocity_data, predict_velocity, preprocess_velocity_data
 from tempflow import load_model_and_scaler as load_tempflow, get_past_temperatures, prepare_input_sequence, predict_future
 import asyncio
