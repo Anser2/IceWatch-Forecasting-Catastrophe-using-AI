@@ -453,7 +453,7 @@ with col_title:
 @st.cache_resource
 def load_models():
     vel_model, device = load_model("models/terraflow-5.5M.pth")
-    temp_model, temp_scaler = load_tempflow("models/best_tempflow_model1.keras", "models/scaler_tempflow.save")
+    temp_model, temp_scaler = load_tempflow("models/best_tempflow_model1.keras", "models/tempflow_features_scaler.save")
     return vel_model, device, temp_model, temp_scaler
 
 vel_model, device, temp_model, temp_scaler = load_models()
