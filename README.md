@@ -1,9 +1,10 @@
-# GLOF Early Warning System using AI (Still In-Progress)
+# Forecasting Catastrophe Using AI
 Final Year Design Project (FYDP) - NUST
 
-![image](https://github.com/user-attachments/assets/4bd6ab2a-edc6-4cbb-afab-5725fe78a84d)
+![image](https://github.com/user-attachments/assets/2b1ebe1e-51d5-416f-bb6f-2f654387fe3c)
 
-https://github.com/user-attachments/assets/a6cb5224-1810-4089-a829-3d55374be8c6
+
+https://github.com/user-attachments/assets/7f125e53-2083-4411-be21-0b7dac4a3d03
 
 
 # Project Overview
