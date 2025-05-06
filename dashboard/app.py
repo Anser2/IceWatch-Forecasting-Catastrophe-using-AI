@@ -10,7 +10,7 @@ from streamlit_folium import folium_static
 import datetime
 from datetime import timedelta
 from terraflow import load_model, get_velocity_data, predict_velocity, preprocess_velocity_data
-from tempflow import load_model_and_scaler as load_tempflow, get_past_temperatures, prepare_input_sequence, predict_future
+from tempflow import load_model_and_scaler, get_past_temperatures, prepare_input_sequence, predict_future
 import asyncio
 from streamlit_extras.metric_cards import style_metric_cards
 from streamlit_extras.colored_header import colored_header
@@ -453,7 +453,7 @@ with col_title:
 @st.cache_resource
 def load_models():
     vel_model, device = load_model("models/terraflow-5.5M.pth")
-    temp_model, temp_scaler = load_tempflow("models/best_tempflow_model1.keras", "models/scaler_tempflow1.save")
+    temp_model, temp_scaler = load_model_and_scaler("models/best_tempflow_model1.keras", "models/scaler_tempflow1.save")
     return vel_model, device, temp_model, temp_scaler
 
 vel_model, device, temp_model, temp_scaler = load_models()
