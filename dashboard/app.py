@@ -476,7 +476,7 @@ with st.sidebar:
     
     # Set default coordinates based on  lat, lon
     if location_preset == "Shishper Glacier, Pakistan":
-        default_lat, default_lon = 36.4053, 74.7654
+        default_lat, default_lon = 74.7654, 36.4053
     elif location_preset == "Khurdopin Glacier":
         default_lat, default_lon = 75.45967, 36.35835
     elif location_preset == "Passu Glacier":
