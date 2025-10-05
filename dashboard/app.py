@@ -354,6 +354,18 @@ import plotly.io as pio
 pio.templates["custom"] = create_custom_plotly_theme()
 pio.templates.default = "plotly_white+custom"
 
+
+# Add a banner at the top
+st.markdown(
+    """
+    <div style="background-color:#FFDDC1; padding:10px; border-radius:5px; text-align:center; font-size:16px;">
+        <b>Note:</b> I'm not updating this app anymore as I'm busy with other stuff. 
+        For more info, contact me at <a href="mailto:your-email@example.com" style="color:blue;">your-email@example.com</a>.
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
 # Add after the theme function (around line 119)
 def enhanced_metric_card(label, value, delta=None, delta_color="normal", icon=None, theme_color=None):
     """
