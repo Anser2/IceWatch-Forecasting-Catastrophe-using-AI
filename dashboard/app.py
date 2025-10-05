@@ -362,7 +362,7 @@ st.markdown(
         <b>Note:</b> I'm not updating this app anymore as I'm busy with other stuff. 
         Allow these models at least 2 minutes to predict their values as they are running on the cpu.
         Please use the light mode for best experience. 
-        For more info, contact me at <a href="mailto:your-email@example.com" style="color:blue;">your-email@example.com</a>.
+        For more info, contact me at <a href="mailto:msohaib.bee21seecs@seecs.edu.pk" style="color:blue;">msohaib.bee21seecs@seecs.edu.pk</a>.
     </div>
     """,
     unsafe_allow_html=True
