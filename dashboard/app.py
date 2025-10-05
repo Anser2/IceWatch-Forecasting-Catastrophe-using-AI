@@ -953,8 +953,8 @@ def get_temperature_prediction():
 # Enhanced Risk Assessment Function
 # ----------------------------
 
-
-def calculate_glof_risk(FILE_ID, IMAGE_PATH):
+# add riskflow function, use the cnn model in CHILL folder to evaluate for real data
+def calculate_glof_risk():
     """
     Calculate GLOF risk based on velocity and temperature.
     Returns risk level (low, medium, high) and a percentage.
@@ -1139,7 +1139,7 @@ with tabs[0]:
     with col3:
         if result and temp_pred is not None:
             velocity_val, _ = result
-            risk_level, risk_percent = calculate_glof_risk(FILE_ID, IMAGE_PATH)
+            risk_level, risk_percent = calculate_glof_risk()
             
             risk_class = ""
             if risk_level == "High":
