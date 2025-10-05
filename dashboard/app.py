@@ -360,6 +360,8 @@ st.markdown(
     """
     <div style="background-color:#FFDDC1; padding:10px; border-radius:5px; text-align:center; font-size:16px;">
         <b>Note:</b> I'm not updating this app anymore as I'm busy with other stuff. 
+        Allow these models at least 2 minutes to predict their values as they are running on the cpu.
+        Please use the light mode for best experience. 
         For more info, contact me at <a href="mailto:your-email@example.com" style="color:blue;">your-email@example.com</a>.
     </div>
     """,
