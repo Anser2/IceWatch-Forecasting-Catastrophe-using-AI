@@ -450,10 +450,40 @@ with col_title:
 # ----------------------------
 # Load Models & Scalers
 # ----------------------------
+
+def get_project_root():
+    """Get the project root directory."""
+    return os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+
+def get_absolute_path(relative_path):
+    """Convert a relative path to an absolute path from the project root."""
+    return os.path.join(get_project_root(), relative_path)
+    
+# @st.cache_resource
+# def load_models():
+#     vel_model, device = load_model("models/terraflow-5.5M.pth")
+#     temp_model, temp_scaler = load_model_and_scaler("models/best_tempflow_model1.keras", "models/scaler_tempflow1.save")
+#     return vel_model, device, temp_model, temp_scaler
+
 @st.cache_resource
 def load_models():
-    vel_model, device = load_model("models/terraflow-5.5M.pth")
-    temp_model, temp_scaler = load_model_and_scaler("models/best_tempflow_model1.keras", "models/scaler_tempflow1.save")
+    """Load all necessary models."""
+    # Corrected paths to be relative to the project root
+    vel_model_path = "models/terraflow-5.5M.pth"
+    temp_model_path = "models/best_temp_model.h5"
+    scaler_path = "models/scaler_tempflow1.save"
+
+    # Load TerraFlow model
+    # The `load_model` function already handles absolute paths correctly.
+    vel_model, device = load_model(vel_model_path)
+    
+    # Load TempFlow model and scaler using absolute paths
+    absolute_temp_model_path = get_absolute_path(temp_model_path)
+    absolute_scaler_path = get_absolute_path(scaler_path)
+    
+    # The `load_model_and_scaler` function from tempflow.py needs absolute paths
+    temp_model, temp_scaler = load_model_and_scaler(absolute_temp_model_path, absolute_scaler_path)
+    
     return vel_model, device, temp_model, temp_scaler
 
 vel_model, device, temp_model, temp_scaler = load_models()
