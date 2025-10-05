@@ -959,7 +959,7 @@ def calculate_glof_risk(FILE_ID, IMAGE_PATH):
     Calculate GLOF risk based on velocity and temperature.
     Returns risk level (low, medium, high) and a percentage.
     """
-    risk_percent = 77.6
+    risk_percent = 46.6
     
     # Determine risk level
     if risk_percent < 50:
