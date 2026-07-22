@@ -1,5 +1,4 @@
 # Forecasting Catastrophe Using AI
-Final Year Design Project (FYDP) - NUST
 
 ![image](https://github.com/user-attachments/assets/2b1ebe1e-51d5-416f-bb6f-2f654387fe3c)
 
